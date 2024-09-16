@@ -1,7 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { importCurrentFile, importFile } from './db/import';
+import { CMD_importCurrentFile, CMD_importFile } from './db/import-commands';
 
 type ragyvaConfig = {
 		dbURL: string,
@@ -25,10 +25,10 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(disposable);
 
 	context.subscriptions.push(
-		vscode.commands.registerCommand('ragyva.importFile', importFile)
+		vscode.commands.registerCommand('ragyva.importFile', CMD_importFile)
 	);
 	context.subscriptions.push(
-		vscode.commands.registerCommand('ragyva.importCurrentFile', importCurrentFile)
+		vscode.commands.registerCommand('ragyva.importCurrentFile', CMD_importCurrentFile)
 	);
 
 	console.log('"ragyva" activation <<Done>>');

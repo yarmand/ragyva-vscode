@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 
-export async function importFile(path?: string) {
+export async function CMD_importFile(path?: string) {
   // If path is not provided, ask the user to input it
   if (!path) {
     path = await vscode.window.showInputBox({
@@ -19,7 +19,7 @@ export async function importFile(path?: string) {
   vscode.window.showInformationMessage(`ready to import ${path}`);
 };
 
-export async function importCurrentFile() {
+export async function CMD_importCurrentFile() {
   let path: string;
   const editor = vscode.window.activeTextEditor;
   if (editor) {
@@ -29,5 +29,4 @@ export async function importCurrentFile() {
       vscode.window.showErrorMessage('No active editor found. Please open a file.');
       return;
   }
-  vscode.window.showInformationMessage(`ready to import ${path}`);
 }
