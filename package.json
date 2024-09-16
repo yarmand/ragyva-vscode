@@ -16,8 +16,27 @@
       {
         "command": "ragyva.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "ragyva.importFile",
+        "title": "ragyva:Import File in Database"
+      },
+      {
+        "command": "ragyva.importCurrentFile",
+        "title": "ragyva:Import Current File in Database"
       }
-    ]
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "ragyva extension settings",
+      "properties": {
+        "ragyva.dbURL": {
+          "type": "string",
+          "default": ".db/testDB",
+          "description": "The location of the lanceDB files"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
