@@ -48,4 +48,13 @@ RUN pip install azure-cli
 # vscode extensions generator
 RUN npm install --global yo generator-code
 
+# ollama
+RUN cd && \
+    curl --fail --show-error --location --progress-bar -o ollama.tgz 'https://ollama.com/download/ollama-linux-amd64.tgz' && \
+    TDIR=$(mktemp -d) &&\
+    tar xvf ollama.tgz -C ${TDIR} && \
+    chmod +x ${TDIR}/bin/ollama && \
+    sudo mv ${TDIR}/bin/ollama /usr/local/bin &&\
+    rm -rf ${TDIR}
+
 CMD /usr/bin/zsh -c 'while true ; do sleep 1000 ; done'

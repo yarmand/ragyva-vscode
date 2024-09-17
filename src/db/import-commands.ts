@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { importMDNote } from './import-markdown-note';
 
 export async function CMD_importFile(path?: string) {
   // If path is not provided, ask the user to input it
@@ -29,4 +30,5 @@ export async function CMD_importCurrentFile() {
       vscode.window.showErrorMessage('No active editor found. Please open a file.');
       return;
   }
+  importMDNote(path);
 }

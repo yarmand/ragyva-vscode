@@ -32,8 +32,23 @@
       "properties": {
         "ragyva.dbURL": {
           "type": "string",
-          "default": ".db/testDB",
+          "default": "./.db/testDB",
           "description": "The location of the lanceDB files"
+        },
+        "ragyva.ollamaURL": {
+          "type": "string",
+          "default": "http://host.docker.internal:11434",
+          "description": "Where to access ollama"
+        },
+        "ragyva.embedModel": {
+          "type": "string",
+          "default": "nomic-embed-text",
+          "description": "model used to generate embedings"
+        },
+        "ragyva.chatModel": {
+          "type": "string",
+          "default": "phi3:instruct",
+          "description": "model used to generate embedings"
         }
       }
     }
@@ -66,7 +81,6 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "@lancedb/lancedb": "^0.10.0",
-    "apache-arrow": "^17.0.0"
+    "ollama": "^0.5.9"
   }
 }
