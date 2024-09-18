@@ -24,16 +24,20 @@
       {
         "command": "ragyva.importCurrentFile",
         "title": "ragyva:Import Current File in Database"
+      },
+      {
+        "command": "ragyva.queryRetrieve",
+        "title": "ragyva:Query document retrieval"
       }
     ],
     "configuration": {
       "type": "object",
       "title": "ragyva extension settings",
       "properties": {
-        "ragyva.dbURL": {
+        "ragyva.ragyvaURL": {
           "type": "string",
-          "default": "./.db/testDB",
-          "description": "The location of the lanceDB files"
+          "default": "http://172.17.0.3:8824",
+          "description": "The location of the ragyva server"
         },
         "ragyva.ollamaURL": {
           "type": "string",
@@ -45,10 +49,10 @@
           "default": "nomic-embed-text",
           "description": "model used to generate embedings"
         },
-        "ragyva.chatModel": {
+        "ragyva.mainModel": {
           "type": "string",
           "default": "phi3:instruct",
-          "description": "model used to generate embedings"
+          "description": "Model used for retrieving and reasoning"
         }
       }
     }
@@ -81,6 +85,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
+    "axios": "^1.7.7",
     "ollama": "^0.5.9"
   }
 }
