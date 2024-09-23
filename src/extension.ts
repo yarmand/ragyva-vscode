@@ -1,17 +1,19 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { CMD_importCurrentFile, CMD_importFile, CMD_queryRetrieve } from './ragyva/commands';
+import { CMD_chat, CMD_importCurrentFile, CMD_importFile, CMD_startNewChat } from './ragyva/commands';
 
 type ragyvaConfig = {
 		ragyvaURL: string,
-		ollamaURL: string,
 		embedModel: string,
 		mainModel: string,
 };
 
 export var config: ragyvaConfig;
-// export var ollama: Ollama;
+export var conversationID: string; // the current conversation
+export function newConversationID() {
+  conversationID = Date.now().toString();
+}
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -35,7 +37,10 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.commands.registerCommand('ragyva.importCurrentFile', CMD_importCurrentFile)
 	);
 	context.subscriptions.push(
-		vscode.commands.registerCommand('ragyva.queryRetrieve', CMD_queryRetrieve)
+		vscode.commands.registerCommand('ragyva.startNewChat', CMD_startNewChat)
+	);
+	context.subscriptions.push(
+		vscode.commands.registerCommand('ragyva.chat', CMD_chat)
 	);
 
 	console.log('"ragyva" activation <<Done>>');

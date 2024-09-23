@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { conversationID, newConversationID } from '../extension';
 import { importMDNote } from './import-markdown-note';
 import { queryRetrieve } from './retrieve';
 
@@ -43,7 +44,12 @@ export async function CMD_importCurrentFile() {
   }
 }
 
-export async function CMD_queryRetrieve() {
+export async function CMD_startNewChat() {
+  newConversationID();
+  CMD_chat();
+}
+
+export async function CMD_chat() {
   const userInput = await vscode.window.showInputBox({
     prompt: 'Enter input for retrieval'
   });
@@ -54,7 +60,7 @@ export async function CMD_queryRetrieve() {
   }
 
   // Call the retrieve function with the user input
-  const result = await queryRetrieve(userInput);
+  const result = await queryRetrieve(userInput, conversationID);
 
   // Get the active text editor
   const editor = vscode.window.activeTextEditor;

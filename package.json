@@ -19,15 +19,19 @@
       },
       {
         "command": "ragyva.importFile",
-        "title": "ragyva:Import File in Database"
+        "title": "ragyva:Import File in ragyva"
       },
       {
         "command": "ragyva.importCurrentFile",
-        "title": "ragyva:Import Current File in Database"
+        "title": "ragyva:Import Current File in ragyva"
       },
       {
-        "command": "ragyva.queryRetrieve",
-        "title": "ragyva:Query document retrieval"
+        "command": "ragyva.startNewChat",
+        "title": "ragyva:start a new conversation with ragyva"
+      },
+      {
+        "command": "ragyva.chat",
+        "title": "ragyva:Continue current conversation with ragyva"
       }
     ],
     "configuration": {
@@ -38,11 +42,6 @@
           "type": "string",
           "default": "http://172.17.0.3:8824",
           "description": "The location of the ragyva server"
-        },
-        "ragyva.ollamaURL": {
-          "type": "string",
-          "default": "http://host.docker.internal:11434",
-          "description": "Where to access ollama"
         },
         "ragyva.embedModel": {
           "type": "string",
