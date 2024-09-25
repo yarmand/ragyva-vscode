@@ -2,6 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { CMD_chat, CMD_importCurrentFile, CMD_importFile, CMD_startNewChat } from './ragyva/commands';
+import { queryRetrieve } from './ragyva/retrieve';
 
 type ragyvaConfig = {
 		ragyvaURL: string,
@@ -14,6 +15,27 @@ export var conversationID: string; // the current conversation
 export function newConversationID() {
   conversationID = Date.now().toString();
 }
+
+interface IRagyvaChatResult extends vscode.ChatResult {
+	metadata: {
+			command: string;
+	}
+}
+
+const handler: vscode.ChatRequestHandler = async (
+  request: vscode.ChatRequest,
+  context: vscode.ChatContext,
+  stream: vscode.ChatResponseStream,
+  token: vscode.CancellationToken
+): Promise<IRagyvaChatResult> => {
+
+  newConversationID();
+  const response = await queryRetrieve(request.prompt, conversationID);
+	stream.markdown(response);
+
+	return { metadata: { command: 'continueChat' } };
+};
+
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -42,6 +64,12 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		vscode.commands.registerCommand('ragyva.chat', CMD_chat)
 	);
+
+	  // Register the chat participant and its request handler
+		const chat = vscode.chat.createChatParticipant('ragyva', handler);
+
+		// Optionally, set some properties for @cat
+		chat.iconPath = vscode.Uri.joinPath(context.extensionUri, 'cat.jpeg');
 
 	console.log('"ragyva" activation <<Done>>');
 }
