@@ -2,16 +2,25 @@
   "name": "ragyva",
   "displayName": "ragyva",
   "description": "a RAG system for the markdown notes you keep in VScode",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "engines": {
     "vscode": "^1.93.0"
   },
   "categories": [
-    "Other"
+    "AI",
+    "Chat"
   ],
   "activationEvents": [],
-  "main": "./dist/extension.js",
   "contributes": {
+    "chatParticipants": [
+			{
+				"id": "ragyva",
+				"fullName": "ragyva",
+				"name": "ragyva",
+				"description": "Lets chat with your notes",
+				"isSticky": true
+			}
+		],
     "commands": [
       {
         "command": "ragyva.helloWorld",
@@ -56,6 +65,7 @@
       }
     }
   },
+  "main": "./dist/extension.js",
   "scripts": {
     "vscode:prepublish": "npm run package",
     "compile": "npm run check-types && npm run lint && node esbuild.js",
